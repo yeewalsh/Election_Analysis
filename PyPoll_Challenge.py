@@ -107,15 +107,18 @@ with open(file_to_save, "w") as txt_file:
         txt_file.write(county_results)
          # 6f: Write an if statement to determine the winning county and get its vote count.
         if (voters > county_turnout):
+            county_turnout = voters
             # set the county w/ largest voter count to county_turnout
             county_largest = county_name
 
     # 7: Print the county with the largest turnout to the terminal.
-        largest_turnout = (
-            f"{county_name} had the largest turnout of {voters:,} votes")
-        print(largest_turnout)
+    largest_turnout = (
+        f"\n-------------------------\n"
+        f"{county_largest} County had the largest turnout of {county_turnout:,} votes cast.\n"
+        f"-------------------------\n")
+    print(largest_turnout)
     # 8: Save the county with the largest turnout to a text file.
-        txt_file.write(largest_turnout)
+    txt_file.write(largest_turnout)
 
     # Save the final candidate vote count to the text file.
     for candidate_name in candidate_votes:

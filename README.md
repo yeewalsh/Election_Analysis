@@ -32,5 +32,26 @@ The winner of the election was Diane DeGette:
 
 
 ## Challenge Overview
+To complete the audit of election results, the Board of Elections wanted to analyze the voter turnout per county. The steps in this process included:
+
+1. Make a list of the County Names
+2. Get the total number of votes per County
+3. Find the percentage of total votes cast in each County
+4. Find the county with the hightest voter turnout
+
+## Challenge Audit Results
+The findings of the county audit included the number and percentage of total votes per county:
+- Jefferson County:
+    - 38,855 votes 
+    - 10.5% of total votes
+- Denver County: 
+    - 306,055
+    - 82.8% of total votes
+- Arapahoe County:
+    - 24,801 votes
+    - 6.7% of total votes
 
 ## Challenge Summary
+Out of the total 369,711 votes cast, the highest turnout was in Denver county. 
+
+Denver county residents cast 82.8% of the total votes. 
