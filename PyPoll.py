@@ -76,7 +76,7 @@ with open(file_to_create, 'w') as text_file:
     for candidate_name in candidate_votes:
         
         # get the votes of the candidate from the candidate_votes dictionary
-        votes = candidate_votes[candidate_name]
+        votes = candidate_votes.get(candidate_name)
 
         # calculate the percentage of the votes.
         vote_percentage = float(votes) / float(total_votes) * 100
