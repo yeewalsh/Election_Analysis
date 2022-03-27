@@ -17,20 +17,8 @@ file_to_load = os.path.join('Resources', 'election_results.csv')
 # assign a variable to save the file to a path for the anlysis
 file_to_create = os.path.join('analysis', 'election_analysis.txt')
 
-# use the with statement to open the file as a text file.
-with open(file_to_create, 'w') as outfile:
-
-    # write three counties to the new outfile
-    outfile.write('Counties in the Election\n')
-    outfile.write('----------------------------\n')
-    outfile.write('Arapahoe\nDenver\nJefferson')
-
 # initialize a total vote counter
 total_votes = 0
-# initialize a winning count, percentage, and candidate tracker
-winning_count = 0
-winning_percentage = 0
-winning_candidate = ''
 
 # create a list for candidate names
 candidate_options = []
@@ -38,10 +26,13 @@ candidate_options = []
 # create a dictionary for the votes per candidate
 candidate_votes = {}
 
-# open the file to read the data
-with open(file_to_load) as election_data:
+# initialize a winning count, percentage, and candidate tracker
+winning_count = 0
+winning_percentage = 0
+winning_candidate = ''
 
-    # Read election_data with reader function
+# open the election file and read the data
+with open(file_to_load) as election_data:
     file_reader = csv.reader(election_data)
 
     # Read the header row using next to exclude it from analysis
@@ -61,12 +52,25 @@ with open(file_to_load) as election_data:
             # Add it to the list of candidates
             candidate_options.append(candidate_name)
 
-            # create each candidate as a key in the votes dictionary
+            # create each candidate as a key in the votes dictionary to count their votes
             candidate_votes[candidate_name] = 0
         
         # Add a vote to that candidate's total count
         candidate_votes[candidate_name] += 1
 
+# use the with statement to open the file as a text file.
+with open(file_to_create, 'w') as text_file:
+
+    # Print Election results
+    election_results = (
+        f"\nElection Results\n"
+        f"----------------------------\n"
+        f"Total Votes: {total_votes:,}\n"
+        f"----------------------------\n")
+    print(election_results, end="")
+    # save election results to new text_file
+    text_file.write(election_results)
+   
     # loop through the candidates to calculate their percentage of the total vote
     # iterate through the candidate_options to get the candidates name
     for candidate_name in candidate_votes:
@@ -76,11 +80,13 @@ with open(file_to_load) as election_data:
 
         # calculate the percentage of the votes.
         vote_percentage = float(votes) / float(total_votes) * 100
-        # round later with f string
-        #vote_percentage = round(vote_percentage, 1)
 
-        # print the candidate name and percentage of votes.
-        print(f"{candidate_name}: {vote_percentage:.1f}% ({votes:,})\n")
+        # save the candidate name and percentage of votes for printing
+        candidate_results = (
+            f"{candidate_name}: {vote_percentage:.1f}% ({votes:,})\n")
+        print(candidate_results)
+        # save candidate results to text_file
+        text_file.write(candidate_results)
 
         # If statement to determine which vote / vote percentage is higher than winning count / percentage
         if (votes > winning_count) and (vote_percentage > winning_percentage):
@@ -91,24 +97,21 @@ with open(file_to_load) as election_data:
             #set the winning_candidate equal to candidate's name
             winning_candidate = candidate_name
 
+    # write three counties to the new text_file
+    #text_file.write('Counties in the Election\n')
+    #text_file.write('----------------------------\n')
+    #text_file.write('Arapahoe\nDenver\nJefferson')
+    print('----------------------------\n')
+    text_file.write('----------------------------\n')
 
-# Print total # of votes        
-print("The total number of votes cast was ", total_votes)
-
-# print the candidate options
-print("The options for candidates included: ", candidate_options)
-
-# print the votes per candidate in candidate vote dictionary
-print("The votes per candidate were: ", candidate_votes)
-
-# print the winning candidate information
-winning_candidate_summary = (
-    f"----------------------------\n"
-    f"Winner: {winning_candidate}\n"
-    f"Winning Vote Count: {winning_count:,}\n"
-    f"Winning Percentage: {winning_percentage:.1f}%\n"
-    f"----------------------------\n")
-print(winning_candidate_summary)
+    # print the winning candidate information
+    winning_candidate_summary = (
+        f"Winner: {winning_candidate}\n"
+        f"Winning Vote Count: {winning_count:,}\n"
+        f"Winning Percentage: {winning_percentage:.1f}%\n"
+        f"----------------------------\n")
+    print(winning_candidate_summary)
+    text_file.write(winning_candidate_summary)
 
 
 
