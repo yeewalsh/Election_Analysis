@@ -30,6 +30,7 @@ The candidate results were:
 The winner of the election was Diane DeGette:
   - Representative DeGette won 73.8%, or 272,892 of votes cast.
 
+![Election_Analysis](analysis/election_analysis_1.png)
 
 ## Challenge Overview
 To complete the audit of election results, the Board of Elections wanted to analyze the voter turnout per county. The steps in this process included:
